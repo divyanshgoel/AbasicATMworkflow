@@ -14,7 +14,7 @@
 				<div class="col-md-8">
 					<div >
 						<div id="logStyle">
-							<table id="table1">
+							<table id="table1" class="table">
 								<thead>
 								<tr>
 								  <th>Amount</th>
@@ -52,7 +52,34 @@
 					</div>	
 				</div>
 			  	<div class="col-md-4">
-					hello
+					<h1>Customer View</h1>
+					<hr/>
+					<form>
+						<div class="form-group">
+							<label for="InputAmount">Enter the Amount you would like to Withdraw :-</label>
+							<br/>
+							<br/>
+							<div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">$</div>
+										<input type="number" class="form-control" id="amount" placeholder="Amount" min="0" onBlur="checkError()" value="" required>
+									</div>
+								</div>
+								<!--                        <br/>-->
+								<center>
+									<div class="col-sm-4" >
+										<button type="submit" class="btn btn-primary" onclick="checkError()">Withdraw Amount</button>
+									</div>
+								</center>
+							</div>
+						</div>
+					</form>
+					<br/>
+					<br/>
+					<div id="currencyDenominations">
+					</div>
+					<div id="error">
 			  	</div>
 			</div>
 	  </div>
