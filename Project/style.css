@@ -21,19 +21,17 @@ header
 
 #logStyle
 {
-	min-height: 300px;
+	height: 300px;
+    overflow: scroll;
 }
 
 #currAmount
 {
 	font-size: 20px;
 	font-weight: bold;
-}
-
-#currentAmount
-{
-	font-size: 20px;
-	font-weight: bold;
+	border-bottom: 1px solid gray;
+	border-top: 1px solid gray;
+	padding: 7px 0;
 }
 
 header h1
@@ -104,8 +102,20 @@ input[type=button]:hover {
 	color: red;
 }
 
-#amountDiv, #amountLabel, #currencyDenominations, #error
+#amountDiv, #amountLabel
 {
 	margin-bottom: 20px;
+}
+
+#logside
+{
+	border: 1px solid gray;
+}
+
+#userside
+{
+	border-bottom: 1px solid gray;
+	border-right: 1px solid gray;
+	padding-bottom: 40px;
 }
 

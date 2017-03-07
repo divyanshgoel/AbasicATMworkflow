@@ -16,7 +16,7 @@
 					var value=$("#max_limit").val();
 					
            			if(value % 100 !=0 || value == 0 || value < 0) {
-						alert("Enter in multiple of 100");
+						alert("Enter Limit in multiple of 100");
 						$("#max_limit").focus();
 					}else {
                			o.obj.count_2000 = $("#2000").val();
