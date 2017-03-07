@@ -24,6 +24,18 @@ header
 	min-height: 300px;
 }
 
+#currAmount
+{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#currentAmount
+{
+	font-size: 20px;
+	font-weight: bold;
+}
+
 header h1
 {
   margin: 0;
@@ -56,14 +68,13 @@ th {
 input[type=number], select {
     width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
-input[type=submit] {
+input[type=button] {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -74,7 +85,7 @@ input[type=submit] {
     cursor: pointer;
 }
 
-input[type=submit]:hover {
+input[type=button]:hover {
     background-color: #45a040;
 }
 
@@ -83,3 +94,18 @@ input[type=submit]:hover {
     background-color: #f2f2f2;
     padding: 20px;
 }
+
+.formSpacing{
+	margin: 8px 0;
+}
+
+#error
+{
+	color: red;
+}
+
+#amountDiv, #amountLabel, #currencyDenominations, #error
+{
+	margin-bottom: 20px;
+}
+
