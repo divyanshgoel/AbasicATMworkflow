@@ -4,25 +4,20 @@
 import React from 'react'
 import Header from './Header';
 import Footer from './Footer';
+import Stats from './Stats'
 import style from './style.css';
 
 export default class Page extends React.Component {
   constructor() {
     super()
-    this.state = {
-      count: 0
-    }
   }
 
-  handleClick() {
-    var count = this.state.count + 1;
-    this.setState({count: count});
-  }
 
   render() {
     return (
       <div>
         <Header />
+        <Stats />
         <Footer />
       </div>
     )
