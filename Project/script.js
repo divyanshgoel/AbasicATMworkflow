@@ -1,7 +1,6 @@
 
 	  	$(document).ready(function(){
-			var leftAmount = 0;
-			var withdrawalAmount = 0;
+			
 			var note2000 = 0, note500 = 0, note100 = 0, withdrawAmount;
 			function ATM()
 			{
@@ -11,7 +10,8 @@
 					   count_100 : 0,
 					   max_limit: 0
 					  };
-				
+				this.withdrawalAmount = 0;
+				this.leftAmount = 0;
 				this.fillATM = function()
 				{
 					var value=$("#max_limit").val();
@@ -21,15 +21,16 @@
 						o.obj.count_500 = $("#500").val();
 						 o.obj.count_100 = $("#100").val();
 						   o.obj.max_limit = $("#max_limit").val();
-						leftAmount = o.obj.count_2000*2000 + o.obj.count_500*500 + o.obj.count_100*100;
+						o.leftAmount = o.obj.count_2000*2000 + o.obj.count_500*500 + o.obj.count_100*100;
 						var str = "<tr id='fillatm'>" +
-						"<td>" + leftAmount +"<\/td>" +
+						"<td>" + o.leftAmount +"<\/td>" +
 						"<td>" + o.obj.count_2000 +"<\/td>" +
 						"<td>" + o.obj.count_500 +"<\/td>" +
 						"<td>" + o.obj.count_100 +"<\/td>" +
-						"<td>" + leftAmount +"<\/td>" +
+						"<td>" + o.leftAmount +"<\/td>" +
 						"</tr>";
 						$('#table1').find('tbody').append(str);
+					$('#currentAmount').html(o.leftAmount);
 						$('#fillatm').css({ 'background-color' : 'green'});
 
 					/*}else
@@ -39,27 +40,38 @@
 						}*/
 				}
 
-				this.addLog = function()
+				
+				
+				
+			}
+            
+			
+			var o = new ATM();
+			
+			function addLog()
 				{
+					o.leftAmount = o.obj.count_2000*2000 + o.obj.count_500*500 + o.obj.count_100*100;
 					var str = "<tr>" +
-					"<td>" + withdrawalAmount +"<\/td>" +
+					"<td>" + o.withdrawalAmount +"<\/td>" +
 					"<td>" + o.obj.count_2000 +"<\/td>" +
 					"<td>" + o.obj.count_500 +"<\/td>" +
 					"<td>" + o.obj.count_100 +"<\/td>" +
-					"<td>" + leftAmount +"<\/td>" +
+					"<td>" + o.leftAmount +"<\/td>" +
 					"</tr>";
 					$('#table1').find('tbody').append(str);
+					$('#currentAmount').html(o.leftAmount);
 					$('#table1 tbody tr').css({ 'background-color' : 'red'});
-					//$('#fillatm').css({ 'background-color' : 'green'});
+					$('#fillatm').css({ 'background-color' : 'green'});
 				}
-				
-				this.checkError = function(){
+			
+			function checkError(){
+					
 				var dailyWithdrawLimit = o.obj.max_limit;
-                console.log("inside Function");
-
+               
+					
                 withdrawAmount = document.getElementById("amount").value;
 
-                console.log(withdrawAmount);
+                
 
                 if (withdrawAmount % 100 != 0 || withdrawAmount == 0 || withdrawAmount < 0){
 
@@ -74,11 +86,11 @@
                     
                     withdrawAmount = parseInt(withdrawAmount);
 
-                    console.log(withdrawAmount);
+                    
 
                     if(withdrawAmount > dailyWithdrawLimit){
 
-                        console.log("hdvchkbjcjas");
+                        
                         var limitError = "Your Daily Withdrawl Limit is " + dailyWithdrawLimit + " only , Please Re-Enter the Amount" ;
                         document.getElementById("amount").value = "";
                         document.getElementById("currencyDenominations").innerHTML = "";
@@ -89,13 +101,9 @@
 
                     else{
 
-
+						o.withdrawalAmount = withdrawAmount;
                         while (withdrawAmount >= 100)
                         {
-                            console.log("inside while loop");
-
-                            console.log(typeof(withdrawAmount));
-
                             if (withdrawAmount >= 2000) {
 
                                 withdrawAmount -= 2000;
@@ -109,27 +117,32 @@
 
                             }
 
-                            else if (withdrawAmount >= 100) {
+                            else {
 
                                 withdrawAmount -= 100;
                                 note100++;
 
                             }
 							
-							else{
-								console.log("inside Else");
-							}
                         }
-
-						/*o.obj.count_2000 -= note2000;
-						o.obj.count_500 -= note500;
-						o.obj.count_100 -= note100;
-						withdrawalAmount = withdrawAmount;*/
+						if(o.obj.count_2000 >= note2000 && o.obj.count_500 >= note500 && o.obj.count_100 >= note100)
+							{
+								o.obj.count_2000 -= note2000;
+								o.obj.count_500 -= note500;
+								o.obj.count_100 -= note100;
+								addLog();
+							}
+							
+						else
+							document.getElementById("error").innerHTML = "Cannot withdraw Amount";
 						
-                        console.log(note2000,note500,note100);
-
+													
+						
+						
+					}
+					
                         document.getElementById("currencyDenominations").innerHTML = "<emp>The Denominations for the above amount will be </emp> <br>  <label> 2000 :- <span>" + note2000 +"</span> </label> <br> <label> 500 :- <span>" + note500 +"</span></label> <br/> <label> 100 :- <span>" + note100 + "</span></label>"
-
+						note2000 = 0, note500 = 0, note100 = 0;
                         document.getElementById("error").innerHTML = "";
                     }
 					
@@ -138,12 +151,6 @@
 					console.log(this.obj.count_2000, this.obj.count_500 , this.obj.count_100);
 					console.log(leftAmount);
                 }
-            }
-			}
-			
-			var o = new ATM();
-			
-			
 		  
 		  
 			$( "#btn1" ).on('click',function() {
@@ -153,8 +160,8 @@
 			
 			
 			$( "#btn2" ).on('click',function() {
-				o.checkError();
-				 o.addLog();
+					checkError();
+							 
 				});
 			
 			
