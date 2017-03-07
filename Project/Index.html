@@ -28,7 +28,6 @@
 							</tbody>
 						  </table>
 						</div>
-						<button id="btn2">withdrawATM</button>
 					</div>
 					<div id="fillatm">
 					  <form name="Fill_ATM">
@@ -47,7 +46,7 @@
 						<input type="number" id="max_limit" min=0 placeholder="Max limit" required>
 
 
-						<input type="submit" id="btn1" value="Submit" onclick="fillatm()" >
+						<input type="submit" id="btn1" value="Submit" />
 					  </form>
 					</div>	
 				</div>
@@ -63,13 +62,13 @@
 								<div class="col-sm-6">
 									<div class="input-group">
 										<div class="input-group-addon">$</div>
-										<input type="number" class="form-control" id="amount" placeholder="Amount" min="0" onBlur="checkError()" value="" required>
+										<input type="number" class="form-control" id="amount" placeholder="Amount" min="0" value="" required>
 									</div>
 								</div>
 								<!--                        <br/>-->
 								<center>
 									<div class="col-sm-4" >
-										<button type="submit" class="btn btn-primary" onclick="checkError()">Withdraw Amount</button>
+										<button type="submit" class="btn btn-primary"  id="btn2">Withdraw Amount</button>
 									</div>
 								</center>
 							</div>
@@ -84,7 +83,7 @@
 			</div>
 	  </div>
 	  
-
+	  </div>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
