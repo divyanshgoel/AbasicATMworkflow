@@ -136,6 +136,32 @@
 					checkError();
 							 
 				});
+			$( "#2000" ).focusout(function() {
+				if($(this).val() < 0){
+					$(this).val('0');
+				}
+		  	});
+			$( "#500" ).focusout(function() {
+				if($(this).val() < 0){
+					$(this).val('0');
+				}
+		  	});
+			$( "#100" ).focusout(function() {
+				if($(this).val() < 0){
+					$(this).val('0');
+				}
+		  	});
+			
+			$( "#max_limit" ).focusout(function() {
+				if($(this).val() < 0){
+					$(this).val('0');
+				}
+		  	});
+			$( "#amount" ).focusout(function() {
+				if($(this).val() < 0){
+					$(this).val('0');
+				}
+		  	});
 		});
 		
 		/*document.onkeydown = function(e) {
