@@ -1,0 +1,84 @@
+body {
+  padding: 0;
+  margin: 0;
+  top: 0;
+}
+
+footer {
+  padding: 1em;
+  color: white;
+  background-color: black;
+  clear: left;
+  text-align: center;
+}
+
+header
+{
+  padding-left: 10%;
+  background-color: black;
+  color: white;
+}
+
+#logStyle
+{
+	min-height: 300px;
+}
+
+header h1
+{
+  margin: 0;
+  padding: 1% 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr{
+  background-color: green;
+}
+
+/*tr:nth-child(even){background-color: #f2f2f2}*/
+
+th {
+  background-color: grey;
+  color: white;
+}
+
+
+input[type=number], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a040;
+}
+
+#fillatm {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
