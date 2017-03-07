@@ -1,5 +1,27 @@
-
-		  var obj = {
+		document.onkeydown = function(e) {
+			var key;
+			if (window.event) {
+				key = event.keyCode
+			}
+			else {
+				var unicode = e.keyCode ? e.keyCode : e.charCode
+				key = unicode
+			}
+			switch (key) {//event.keyCode
+				case 116: //F5 button
+				event.returnValue = false;
+				key = 0; //event.keyCode = 0;
+				return false;
+				case 82: //R button
+				if (event.ctrlKey) {
+					event.returnValue = false;
+					key = 0; //event.keyCode = 0;
+					return false;
+				}
+			}
+		}
+	  	$(document).ready(function(){
+			var obj = {
 			  count_2000 : 0,
 				   count_500 : 0,
 				   count_100 : 0,
@@ -7,8 +29,6 @@
 		  };
 		  var leftAmount = 0;
 		  var withdrawalAmount = 1000;
-		  
-	  	$(document).ready(function(){
 			$( "#btn1" ).on('click',function() {
 				 fillATM();
 				$("#btn1").attr("disabled", true);
