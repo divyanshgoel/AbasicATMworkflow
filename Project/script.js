@@ -1,12 +1,14 @@
 $(document).ready(function(){
 
-    var note2000 = 0, note500 = 0, note100 = 0, withdrawAmount;
+    var note2000 = 0, note500 = 0, note100 = 0,note50=0, withdrawAmount;
+   
     function ATM()
     {
         this.obj = {
             count_2000 : 0,
             count_500 : 0,
             count_100 : 0,
+            count_50 : 0,
             max_limit: 0
         };
 
@@ -16,15 +18,39 @@ $(document).ready(function(){
         {
             var value=$("#max_limit").val();
 
-            if(value % 100 !=0 || value == 0 || value < 0) {
+            if(value % 50 !=0 || value == 0 || value < 0) {
                 alert("Enter Limit in multiple of 100");
                 $("#max_limit").focus();
             }else {
-                o.obj.count_2000 = $("#2000").val();
-                o.obj.count_500 = $("#500").val();
-                o.obj.count_100 = $("#100").val();
-                o.obj.max_limit = $("#max_limit").val();
-                o.leftAmount = o.obj.count_2000*2000 + o.obj.count_500*500 + o.obj.count_100*100;
+                if($("#2000").val() != null )
+                    o.obj.count_2000 = $("#2000").val();
+
+                else document.getElementById("error").innerHTML = "Invalid Data Entry"
+
+                if($("#500").val() != null )
+                    o.obj.count_500 = $("#500").val();
+
+                else document.getElementById("error").innerHTML = "Invalid Data Entry"
+
+                if($("#100").val() != null )
+                    o.obj.count_100 = $("#100").val();
+
+                else document.getElementById("error").innerHTML = "Invalid Data Entry"
+                
+                if($("#50").val() != null )
+                    o.obj.count_50 = $("#50").val();
+
+                else document.getElementById("error").innerHTML = "Invalid Data Entry"
+                
+                
+                if($("#max_limit").val() != null )
+                {
+                    o.obj.max_limit = $("#max_limit").val();
+                    o.leftAmount = o.obj.count_2000*2000 + o.obj.count_500*500 + o.obj.count_100*100 + o.obj.count_50 * 50 ;
+
+                }
+
+                else document.getElementById("error").innerHTML = "Invalid Data Entry"
                 var str = "<tr id='fillatm'>" +
                     "<td>" + o.leftAmount +"<\/td>" +
                     "<td>" + o.obj.count_2000 +"<\/td>" +
@@ -59,7 +85,7 @@ $(document).ready(function(){
         $('#fillatm').css({ 'background-color' : 'green'});
     }
 
-    function checkError(){
+    function checkError(){  
 
         var dailyWithdrawLimit = o.obj.max_limit;
 
@@ -96,38 +122,104 @@ $(document).ready(function(){
 
                     }
                     else if (withdrawAmount >= 500) {
-
                         withdrawAmount -= 500;
                         note500++;
-
                     }
-
                     else {
-
                         withdrawAmount -= 100;
                         note100++;
+                    }
+                }
 
+                if(o.leftAmount >= o.withdrawalAmount)
+                {
+                    if(o.obj.count_2000 >= note2000) // 2000
+                    {
+                        o.obj.count_2000 -= note2000;// 
+                    }
+                    else{
+                        if(o.obj.count_2000 < note2000) //checking 2000 notes availability
+                        {    
+                            var temp2000 = o.obj.count_2000;
+                            o.obj.count_2000 = 0;
+
+                            if(o.obj.count_2000 == 0 ){
+
+                                var diff2000 = note2000 - temp2000; //cheking difference
+                                var make500 = diff2000 * 4; // making 500 notes
+
+                                if(o.obj.count_500 >= (note500+make500)) // for deduction
+                                {
+                                    o.obj.count_500 -= (note500+make500); 
+                                }
+                                else{
+                                    if(o.obj.count_500 < (note500+make500)){
+                                        var temp500 = o.obj.count_500;
+                                        o.obj.count_500 = 0;
+                                        if(o.obj.count_500 == 0 ){
+                                            var diff500 = (note500 + make500) - temp500; 
+                                            var make100 = diff500 * 5 ; // making 100 notes
+
+                                            if(o.obj.count_100 >= (note100+make100))
+                                            {
+                                                o.obj.count_100 -= (note100+make100);
+                                            }
+                                            else{
+                                                if(o.obj.count_100 < (note100 + make100)){
+                                                    flag = 1;
+                                                    document.getElementById("error").innerHTML = "OOPS!! We Cannot Process Your Request as Cash is not present";
+                                                } } }  }  }  }  }  }
+
+                    if(o.obj.count_500 >= note500) // 500
+                    {
+                        o.obj.count_500 -= note500;// 
                     }
 
-                }
-                if(o.obj.count_2000 >= note2000 && o.obj.count_500 >= note500 && o.obj.count_100 >= note100) {
-                    o.obj.count_2000 -= note2000;
-                    o.obj.count_500 -= note500;
-                    o.obj.count_100 -= note100;
+                    else{
+
+                        if(o.obj.count_500 < note500) //checking 500 notes availability
+                        {    
+                            var temp500 = o.obj.count_500;
+                            o.obj.count_500 = 0;
+
+                            if(o.obj.count_500 == 0 ){
+
+                                var diff500 = note500 - temp500; //cheking difference
+                                var make100 = diff500 * 5; // making 100 notes
+
+                                if(o.obj.count_100 >= (note100+make100)) // for deduction
+                                {
+                                    o.obj.count_100 -= (note100+make100); 
+                                }
+                                else{
+                                    if(o.obj.count_100 < (note100+make100)){
+                                        
+                                        document.getElementById("error").innerHTML = "InSufficient Cash in the ATM"
+                                    }  }  }  }
+
+                        else{
+                            document.getElementById("error").innerHTML = "InSufficient Cash in the ATM";
+                        }
+                    }
+
+                    if(o.obj.count_100 >= note100) // 2000
+                    {
+                        o.obj.count_100 -= note100;// 
+                    }
+                    else{
+                        flag = 1;
+                        document.getElementById("error").innerHTML = "InSufficient Cash in the ATM";
+                    }
+
                     document.getElementById("currencyDenominations").innerHTML = "<emp>The Denominations for the above amount will be </emp> <br>  <label> 2000 :- <span>" + note2000 +"</span> </label> <br> <label> 500 :- <span>" + note500 +"</span></label> <br/> <label> 100 :- <span>" + note100 + "</span></label>";
                     addLog();
                     document.getElementById("error").innerHTML = "";
-                }							
-                else {
-                    document.getElementById("currencyDenominations").innerHTML = "";
-                    document.getElementById("error").innerHTML = "<emp>Cannot withdraw amount cash is not available! Only Cash Available </emp> <br>  <label> 2000 :- <span>" + o.obj.count_2000 +"</span> </label> <br> <label> 500 :- <span>" + o.obj.count_500 +"</span></label> <br/> <label> 100 :- <span>" + o.obj.count_100 + "</span></label>";
-                    $("#amount").focus() ;
+
                 }
-            }
+            }							
+
         }
     }
-
-
     $( "#btn1" ).on('click',function() {
         o.fillATM();
 

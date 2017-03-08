@@ -1,3 +1,8 @@
+.formSpacing{
+    margin: 8px 0;
+}
+
+/*
 body {
   padding: 0;
   margin: 0;
@@ -18,12 +23,12 @@ header
   background-color: black;
   color: white;
 }
-
+!*
 #logStyle
 {
 	height: 300px;
     overflow: scroll;
-}
+}*!
 
 #currAmount
 {
@@ -55,7 +60,7 @@ tr{
   background-color: green;
 }
 
-/*tr:nth-child(even){background-color: #f2f2f2}*/
+!*tr:nth-child(even){background-color: #f2f2f2}*!
 
 th {
   background-color: grey;
@@ -119,3 +124,4 @@ input[type=button]:hover {
 	padding-bottom: 40px;
 }
 
+*/
