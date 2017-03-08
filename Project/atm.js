@@ -72,10 +72,10 @@ $(document).ready(function () {
 
     function addMoney() {
 
-        var tmp2000 = parseInt($("#2000").val());
-        var tmp500 = parseInt($("#500").val());
-        var tmp100 = parseInt($("#100").val());
-        var tmp50 = parseInt($("#50").val());
+
+
+
+
         var temp_max_limit = parseInt($("#max_limit").val());;
         console.log("inside add money");
 
@@ -90,28 +90,32 @@ $(document).ready(function () {
         else {
             console.log("fififfiifif")
             // console.log($("#2000").val());
-            if (tmp2000 != "" && tmp2000 >= 0) atm_machine.denominationsCount[0] = tmp2000;
+            var tmp2000 = $("#2000").val();
+            if (tmp2000 != "" && tmp2000 >= 0) atm_machine.denominationsCount[0] = parseInt(tmp2000);
             else if(tmp2000 == "") atm_machine.denominationsCount[0] = 0;
-             else   document.getElementById("error").innerHTML = "Invalid Data Entry"
+             else   document.getElementById("error").innerHTML = "Innnvalid Data Entry"
 
-            if (tmp500 != "" && tmp500 >= 0) atm_machine.denominationsCount[1] = tmp500;
-            else if(tmp500 == "") atm_machine.denominationsCount[1] = 0;
-            else document.getElementById("error").innerHTML = "Invalid Data Entry"
+            var tmp500 = $("#500").val();
+            if (tmp500 != "" && tmp500 >= 0) atm_machine.denominationsCount[1] = parseInt(tmp500);
+            else if(tmp500 == "") {atm_machine.denominationsCount[1] = 0;}
+            else {document.getElementById("error").innerHTML = "Invalid Dddata Entry"}
 
-            if (tmp100 != "" && tmp100 == 0) atm_machine.denominationsCount[2] = tmp100;
+            var tmp100 = $("#100").val();
+            if (tmp100 != "" && tmp100 >= 0) atm_machine.denominationsCount[2] = parseInt(tmp100);
             else if(tmp100 == "") atm_machine.denominationsCount[2] = 0;
-            else document.getElementById("error").innerHTML = "Invalid Data Entry"
+            else document.getElementById("error").innerHTML = "Invalid Data Eeeentry"
 
-            if (tmp50 != "" && tmp50 >= 0) atm_machine.denominationsCount[3] = tmp50;
+            var tmp50 = $("#50").val();
+            if (tmp50 != "" && tmp50 >= 0) atm_machine.denominationsCount[3] = parseInt(tmp50);
             else if(tmp50 == "") atm_machine.denominationsCount[3] = 0;
-            else document.getElementById("error").innerHTML = "Invalid Data Entry"
+            else document.getElementById("error").innerHTML = "Invalid Data Entry4"
 
             console.log(atm_machine.denominationsCount);
 
 
-            if(atm_machine.denominationsCount[0]= atm_machine.denominationsCount[1] =atm_machine.denominationsCount[2] =atm_machine.denominationsCount[3] ==0)
+            if(atm_machine.denominationsCount[0]==0 && atm_machine.denominationsCount[1] ==0 && atm_machine.denominationsCount[2] == 0 && atm_machine.denominationsCount[3] == 0)
             {
-                printError("bhai kuch toh daal le ");
+                printError("Please fill atleast one of the Denominations");
                 return;
 
             }
