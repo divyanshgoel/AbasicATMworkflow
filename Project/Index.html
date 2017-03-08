@@ -55,6 +55,7 @@
 							<input type="number" id="max_limit" min=0 placeholder="Max limit" required>
 						  </p>
 						<input type="button" id="btn1" value="Submit" />
+						  <p id="formError"></p>
 					  </form>
 					</div>	
 				</div>
@@ -68,13 +69,14 @@
 								<div class="col-md-6" id="amountDiv">
 									<div class="input-group">
 										<div class="input-group-addon">$</div>
-										<input type="number" class="form-control" id="amount" placeholder="Amount" min="0" value="" required>
+										<input type="number" class="form-control" id="amount" placeholder="Amount" min=0 value="" required>
+										
 									</div>
 								</div>
 								
 								<center>
 									<div class="col-md-6" >
-										<input value="Withdraw Amount" class="btn btn-primary btn-block"  id="btn2"/>
+										<input value="Withdraw Amount" class="btn btn-primary btn-block" type="button" id="btn2"/>
 									</div>
 								</center>
 							</div>
@@ -92,7 +94,7 @@
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	  <script src="/script.js"></script>
+	  <script src="script.js"></script>
   </body>
 
 </html>

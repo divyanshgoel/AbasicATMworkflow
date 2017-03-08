@@ -7,6 +7,7 @@
 				  count_2000 : 0,
 					   count_500 : 0,
 					   count_100 : 0,
+						count_50 : 0,
 					   max_limit: 0
 					  };
 				this.withdrawalAmount = 0;
@@ -14,11 +15,16 @@
 				this.fillATM = function()
 				{
 					var value=$("#max_limit").val();
-					
+					if($("#2000").val() == '' || $("#500").val() == '' || $("#100").val() == '')
+						{
+							document.getElementById("formError").innerHTML = "Value Cannot be null, Please ReEnter!";
+						}
+					else
            			if(value % 100 !=0 || value == 0 || value < 0) {
-						alert("Enter Limit in multiple of 100");
+						document.getElementById("formError").innerHTML = "Enter Limit in multiple of 100";
 						$("#max_limit").focus();
 					}else {
+						document.getElementById("formError").innerHTML = "";
                			o.obj.count_2000 = $("#2000").val();
 						o.obj.count_500 = $("#500").val();
 						o.obj.count_100 = $("#100").val();
@@ -88,10 +94,12 @@
 						o.withdrawalAmount = withdrawAmount;
                         while (withdrawAmount >= 100)
                         {
-                            if (withdrawAmount >= 2000) {
+                            if (withdrawAmount >= 2000 ){
 
                                 withdrawAmount -= 2000;
                                 note2000++;
+								
+								
 
                             }
                             else if (withdrawAmount >= 500) {
@@ -109,7 +117,21 @@
                             }
 							
                         }
-						if(o.obj.count_2000 >= note2000 && o.obj.count_500 >= note500 && o.obj.count_100 >= note100) {
+						
+						/*if((o.obj.count_2000-note2000) > note2000 && o.obj.count_2000 >= note2000)
+							{
+								o.obj.count_2000 -= note2000;
+							}
+						if((o.obj.count_500 - note500) > note500 && o.obj.count_500 >= note500)
+							{
+								o.obj.count_500 -= note500;
+							}
+						if((o.obj.count_100 - note100) > note100 && o.obj.count_100 >= note100)
+							{
+								o.obj.count_100 -= note100;
+							}*/
+						
+						if((o.obj.count_2000 >= note2000) && (o.obj.count_500 >= note500) && (o.obj.count_100 >= note100) ) {
 								o.obj.count_2000 -= note2000;
 								o.obj.count_500 -= note500;
 								o.obj.count_100 -= note100;
