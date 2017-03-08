@@ -1,6 +1,6 @@
 	  	$(document).ready(function(){
 			
-			var note2000 = 0, note500 = 0, note100 = 0, withdrawAmount;
+			var note2000 = 0, note500 = 0, note100 = 0,note50=0, withdrawAmount;
 			function ATM()
 			{
 				this.obj = {
@@ -15,26 +15,28 @@
 				this.fillATM = function()
 				{
 					var value=$("#max_limit").val();
-					if($("#2000").val() == '' || $("#500").val() == '' || $("#100").val() == '')
+					if($("#2000").val() == '' || $("#500").val() == '' || $("#100").val() == '' || $("#50").val() == '')
 						{
 							document.getElementById("formError").innerHTML = "Value Cannot be null, Please ReEnter!";
 						}
 					else
-           			if(value % 100 !=0 || value == 0 || value < 0) {
-						document.getElementById("formError").innerHTML = "Enter Limit in multiple of 100";
+           			if(value % 50 !=0 || value == 0 || value < 0) {
+						document.getElementById("formError").innerHTML = "Enter Limit in multiple of 50";
 						$("#max_limit").focus();
 					}else {
 						document.getElementById("formError").innerHTML = "";
                			o.obj.count_2000 = $("#2000").val();
 						o.obj.count_500 = $("#500").val();
 						o.obj.count_100 = $("#100").val();
+                        o.obj.count_50=$("#50").val();
 						o.obj.max_limit = $("#max_limit").val();
-						o.leftAmount = o.obj.count_2000*2000 + o.obj.count_500*500 + o.obj.count_100*100;
+						o.leftAmount = o.obj.count_2000*2000 + o.obj.count_500*500 + o.obj.count_100*100+o.obj.count_50*50;
 						var str = "<tr id='fillatm'>" +
 						"<td>" + o.leftAmount +"<\/td>" +
 						"<td>" + o.obj.count_2000 +"<\/td>" +
 						"<td>" + o.obj.count_500 +"<\/td>" +
-						"<td>" + o.obj.count_100 +"<\/td>" +
+						"<td>" + o.obj.count_100 +"<\/td>" +  
+						"<td>" + o.obj.count_50 +"<\/td>" +
 						"<td>" + o.leftAmount +"<\/td>" +
 						"</tr>";
 						$('#table1').find('tbody').append(str);
@@ -50,13 +52,14 @@
 			
 			function addLog()
 				{
-					o.leftAmount = o.obj.count_2000*2000 + o.obj.count_500*500 + o.obj.count_100*100;
+					o.leftAmount = o.obj.count_2000*2000 + o.obj.count_500*500 + o.obj.count_100*100+o.obj.count_50*50;
 					var str = "<tr>" +
 					"<td>" + o.withdrawalAmount +"<\/td>" +
 					"<td>" + o.obj.count_2000 +"<\/td>" +
 					"<td>" + o.obj.count_500 +"<\/td>" +
 					"<td>" + o.obj.count_100 +"<\/td>" +
-					"<td>" + o.leftAmount +"<\/td>" +
+					"<td>" + o.obj.count_50 +"<\/td>" +
+                        "<td>" + o.leftAmount +"<\/td>" +
 					"</tr>";
 					$('#table1').find('tbody').append(str);
 					$('#currentAmount').html(o.leftAmount);
@@ -70,7 +73,7 @@
 					
                 withdrawAmount = document.getElementById("amount").value;
 				
-                if (withdrawAmount % 100 != 0 || withdrawAmount == 0 || withdrawAmount < 0){
+                if (withdrawAmount % 50 != 0 || withdrawAmount == 0 || withdrawAmount < 0){
 
                     document.getElementById("amount").value = "";
                     document.getElementById("currencyDenominations").innerHTML = "";
@@ -90,9 +93,9 @@
 						$("#amount").focus() ;
 					}
                     else {
-						note2000 = 0, note500 = 0, note100 = 0;
+						note2000 = 0, note500 = 0, note100 = 0,note50=0;
 						o.withdrawalAmount = withdrawAmount;
-                        while (withdrawAmount >= 100)
+                        while (withdrawAmount >= 50)
                         {
                             if (withdrawAmount >= 2000 ){
 
@@ -109,10 +112,15 @@
 
                             }
 
-                            else {
+                            else if(withdrawAmount >= 100){
 
                                 withdrawAmount -= 100;
                                 note100++;
+
+                            }
+                            else{
+                                    withdrawAmount -= 50;
+                                note50++;
 
                             }
 							
@@ -131,17 +139,18 @@
 								o.obj.count_100 -= note100;
 							}*/
 						
-						if((o.obj.count_2000 >= note2000) && (o.obj.count_500 >= note500) && (o.obj.count_100 >= note100) ) {
+						if((o.obj.count_2000 >= note2000) && (o.obj.count_500 >= note500) && (o.obj.count_100 >= note100) &&(o.obj.count_50 >= note50) ) {
 								o.obj.count_2000 -= note2000;
 								o.obj.count_500 -= note500;
 								o.obj.count_100 -= note100;
-								document.getElementById("currencyDenominations").innerHTML = "<emp>The Denominations for the above amount will be </emp> <br>  <label> 2000 :- <span>" + note2000 +"</span> </label> <br> <label> 500 :- <span>" + note500 +"</span></label> <br/> <label> 100 :- <span>" + note100 + "</span></label>";
+                                o.obj.count_50 -= note50;
+								document.getElementById("currencyDenominations").innerHTML = "<emp>The Denominations for the above amount will be </emp> <br>  <label> 2000 :- <span>" + note2000 +"</span> </label> <br> <label> 500 :- <span>" + note500 +"</span></label> <br/> <label> 100 :- <span>" + note100 + "</span></label>"+"</span></label> <br/> <label> 50 :- <span>" + note50 + "</span></label>";
 								addLog();
 							document.getElementById("error").innerHTML = "";
 						}							
 						else {
 							document.getElementById("currencyDenominations").innerHTML = "";
-							document.getElementById("error").innerHTML = "<emp>Cannot withdraw amount cash is not available! Only Cash Available </emp> <br>  <label> 2000 :- <span>" + o.obj.count_2000 +"</span> </label> <br> <label> 500 :- <span>" + o.obj.count_500 +"</span></label> <br/> <label> 100 :- <span>" + o.obj.count_100 + "</span></label>";
+							document.getElementById("error").innerHTML = "<emp>Cannot withdraw amount cash is not available! Only Cash Available </emp> <br>  <label> 2000 :- <span>" + o.obj.count_2000 +"</span> </label> <br> <label> 500 :- <span>" + o.obj.count_500 +"</span></label> <br/> <label> 100 :- <span>" + o.obj.count_100 + "</span></label>"+"</span></label> <br/> <label> 50 :- <span>" + o.obj.count_50 + "</span></label>";
 							$("#amount").focus() ;
 						}
 					}
@@ -169,6 +178,12 @@
 				}
 		  	});
 			$( "#100" ).focusout(function() {
+				if($(this).val() < 0){
+					$(this).val('0');
+				}
+		  	});
+            
+			$( "#50" ).focusout(function() {
 				if($(this).val() < 0){
 					$(this).val('0');
 				}
