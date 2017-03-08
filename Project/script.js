@@ -1,6 +1,7 @@
 	  	$(document).ready(function(){
 			
 			var note2000 = 0, note500 = 0, note100 = 0,note50=0, withdrawAmount;
+            var numbers = /^\d+$/;
 			function ATM()
 			{
 				this.obj = {
@@ -12,32 +13,39 @@
 					  };
 				this.withdrawalAmount = 0;
 				this.leftAmount = 0;
+               
+                
 				this.fillATM = function()
 				{
 					var value=$("#max_limit").val();
+                     
 					
 					if($("#2000").val() == '' || $("#500").val() == '' || $("#100").val() == '' || $("#50").val() == '')
 						{
-							if($("#2000").val() == '')
-							{
-								document.getElementById("f2000Err").innerHTML = "Value Cannot be null, Please ReEnter!";
-							}
-							if($("#500").val() == '')
-							{
-								document.getElementById("f500Err").innerHTML = "Value Cannot be null, Please ReEnter!";
-							}
-							if($("#100").val() == '')
-							{
-								document.getElementById("f100Err").innerHTML = "Value Cannot be null, Please ReEnter!";
-							}
-							if($("#50").val() == '')
-							{
-								document.getElementById("f50Err").innerHTML = "Value Cannot be null, Please ReEnter!";
-							}
+							if($("#2000").val() == '' || !($("#2000").val().match(numbers)))
+                            {                                
+                                $("#2000").focus();
+                                document.getElementById("f2000Err").innerHTML = "Value Cannot be null and cannot contain any alpha value, Please ReEnter!";
+                            }
+                            if($("#500").val() == '' || !($("#500").val().match(numbers)))
+                            {
+                                $("#500").focus();
+                                document.getElementById("f500Err").innerHTML = "Value Cannot be null and cannot contain any alpha value, Please ReEnter!";
+                            }
+                            if($("#100").val() == '' || !($("#100").val().match(numbers)))
+                            {
+                                $("#100").focus();
+                                document.getElementById("f100Err").innerHTML = "Value Cannot be null and cannot contain any alpha value, Please ReEnter!";
+                            }
+                            if($("#50").val() == '' || !($("#50").val().match(numbers)))
+                            {
+                                $("#50").focus();
+                                document.getElementById("f50Err").innerHTML = "Value Cannot be null and cannot contain any alpha value, Please ReEnter!";
+                            }
 						}
 					else
-           			if(value % 50 !=0 || value == 0 || value < 0) {
-						document.getElementById("formError").innerHTML = "Enter Limit in multiple of 50";
+           			if(value % 50 !=0 || value == 0 || value < 0 || !(value.match(numbers))) {
+						document.getElementById("formError").innerHTML = "Enter Limit in multiple of 50 and value cannot be alpha ";
 						$("#max_limit").focus();
 					}else {
 						document.getElementById("formError").innerHTML = "";
@@ -172,8 +180,77 @@
 					}
 				}
 			}
+            
+            
+            $( "#2000" ).blur(function() {
+                
+              if($("#2000").val() == '' || !($("#2000").val().match(numbers)))
+                {                                
+                    $("#2000").focus();
+                    
+                    document.getElementById("f2000Err").innerHTML = "Value Cannot be null and cannot contain any alpha value, Please ReEnter!";
+                }
+                
+            });
+            
+            $( "#2000" ).focusout(function() {
+                document.getElementById("f2000Err").innerHTML = '';
+            });
+            
+            
+            $( "#500" ).blur(function() {
+                
+                if($("#500").val() == '' || !($("#500").val().match(numbers)))
+                {
+                    $("#500").focus();
+                    document.getElementById("f500Err").innerHTML = "Value Cannot be null and cannot contain any alpha value, Please ReEnter!";
+                }
+            });
+            
+            $( "#500" ).focusout(function() {
+                document.getElementById("f500Err").innerHTML = '';
+            });
+            
+            $( "#100" ).blur(function() {
+               
+                if($("#100").val() == '' || !($("#100").val().match(numbers)))
+                {
+                    $("#100").focus();
+                    document.getElementById("f100Err").innerHTML = "Value Cannot be null and cannot contain any alpha value, Please ReEnter!";
+                }
+            });
+            
+            $( "#100" ).focusout(function() {
+                document.getElementById("f100Err").innerHTML = '';
+            });
+            
+            $( "#50" ).blur(function() {
+               
+                if($("#50").val() == '' || !($("#50").val().match(numbers)))
+                {
+                    $("#50").focus();
+                    document.getElementById("f50Err").innerHTML = "Value Cannot be null and cannot contain any alpha value, Please ReEnter!";
+                }
+            });
+            
+            $( "#50" ).focusout(function() {
+                document.getElementById("f50Err").innerHTML = '';
+            });
+            
+            $( "#max_limit" ).blur(function() {
+               
+                var value=$("#max_limit").val();
+                if(value % 50 !=0 || value == 0 || value < 0 || !(value.match(numbers))) {
+						document.getElementById("formError").innerHTML = "Enter Limit in multiple of 50 and value cannot be alpha ";
+						$("#max_limit").focus();
+					}
+            });
+            
+            $( "#max_limit" ).focusout(function() {
+                document.getElementById("formError").innerHTML = '';
+            });
 		  
-		  
+            
 			$( "#btn1" ).on('click',function() {
 				 o.fillATM();
 				
