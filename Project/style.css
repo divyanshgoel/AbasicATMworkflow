@@ -55,13 +55,11 @@ tr{
   background-color: green;
 }
 
-/*tr:nth-child(even){background-color: #f2f2f2}*/
-
 th {
   background-color: #87CEFA;
   color: black;
+	
 }
-
 
 input[type=number], select {
     width: 100%;
