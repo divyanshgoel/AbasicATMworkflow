@@ -15,9 +15,25 @@
 				this.fillATM = function()
 				{
 					var value=$("#max_limit").val();
+					
 					if($("#2000").val() == '' || $("#500").val() == '' || $("#100").val() == '' || $("#50").val() == '')
 						{
-							document.getElementById("formError").innerHTML = "Value Cannot be null, Please ReEnter!";
+							if($("#2000").val() == '')
+							{
+								document.getElementById("f2000Err").innerHTML = "Value Cannot be null, Please ReEnter!";
+							}
+							if($("#500").val() == '')
+							{
+								document.getElementById("f500Err").innerHTML = "Value Cannot be null, Please ReEnter!";
+							}
+							if($("#100").val() == '')
+							{
+								document.getElementById("f100Err").innerHTML = "Value Cannot be null, Please ReEnter!";
+							}
+							if($("#50").val() == '')
+							{
+								document.getElementById("f50Err").innerHTML = "Value Cannot be null, Please ReEnter!";
+							}
 						}
 					else
            			if(value % 50 !=0 || value == 0 || value < 0) {

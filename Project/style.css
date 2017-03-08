@@ -102,6 +102,11 @@ input[type=number], select {
 	color: red;
 }
 
+#f2000Err, #f500Err, #f100Err, #f50Err
+{
+	color: red;
+}
+
 #amountDiv, #amountLabel
 {
 	margin-bottom: 20px;
@@ -114,7 +119,7 @@ input[type=number], select {
 
 #userside
 {
-	border-bottom: 1px solid gray;
+/*	border-bottom: 1px solid gray;*/
 	border-right: 1px solid gray;
 	padding-bottom: 40px;
 }
